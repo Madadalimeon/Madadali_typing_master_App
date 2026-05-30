@@ -20,7 +20,7 @@
                     <div class="card-body p-4 p-md-5">
                         <h2 class="text-center mb-4">Register</h2>
 
-                        <form action="" method="post">
+                        <form id="RegisterForm" action="" method="post">
                             <div class="mb-3">
                                 <label for="fullname" class="form-label">Fullname</label>
                                 <input type="text" class="form-control" id="fullname" name="fullname" placeholder="Enter your fullname" required>
@@ -57,3 +57,29 @@
 </body>
 
 </html>
+<script>
+    $(document).ready(function() {
+        $("#RegisterForm").on("submit", function(RegisterForm) {
+            RegisterForm.preventDefault();
+            let fullname = $("#fullname").val();
+            let username = $("#username").val();
+            let email = $("#email").val();
+            let password = $("#password").val();
+            $.ajax({
+                url: "../ajax/Register_Ajax.php",
+                method: "POST",
+                data: {
+                    fullname: fullname,
+                    username: username,
+                    email: email,
+                    password: password
+                },
+                success: function(response) {
+                    alert(response);
+                },
+            })
+        })
+
+
+    });
+</script>
