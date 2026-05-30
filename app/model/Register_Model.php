@@ -16,5 +16,7 @@ class Register_Model
         if (mysqli_query($this->conn, $SQL_Query)){
             return 20004;
         }
+
+        return 20008;
     }
 }

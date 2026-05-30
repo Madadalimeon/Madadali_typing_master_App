@@ -19,6 +19,7 @@
                 <div class="card shadow border-0">
                     <div class="card-body p-4 p-md-5">
                         <h2 class="text-center mb-4">Register</h2>
+                        <div id="registerMessage" class="alert alert-secondary d-none" role="alert"></div>
 
                         <form id="RegisterForm" action="" method="post">
                             <div class="mb-3">
@@ -75,7 +76,19 @@
                     password: password
                 },
                 success: function(response) {
-                    alert(response);
+                    if (typeof response === "string") {
+                        try {
+                            response = JSON.parse(response);
+                        } catch (error) {
+                            response = {
+                                message: response
+                            };
+                        }
+                    }
+
+                    $("#registerMessage")
+                        .removeClass("d-none")
+                        .text(response.message);
                 },
             })
         })
